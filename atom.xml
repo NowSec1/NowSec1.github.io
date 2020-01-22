@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://NowSec1.github.io</id>
+    <id>http://localhost:4000</id>
     <title>NowSec</title>
-    <updated>2020-01-22T09:02:03.975Z</updated>
+    <updated>2020-01-22T09:40:42.536Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://NowSec1.github.io"/>
-    <link rel="self" href="https://NowSec1.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://NowSec1.github.io/images/avatar.png</logo>
-    <icon>https://NowSec1.github.io/favicon.ico</icon>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <subtitle>在路上点滴挪步，不骄不躁</subtitle>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
     <rights>All rights reserved 2020, NowSec</rights>
     <entry>
+        <title type="html"><![CDATA[攻防世界_Web进阶区_FileUpload]]></title>
+        <id>http://localhost:4000/post/gong-fang-shi-jie-_web-jin-jie-qu-_fileupload</id>
+        <link href="http://localhost:4000/post/gong-fang-shi-jie-_web-jin-jie-qu-_fileupload">
+        </link>
+        <updated>2020-01-22T09:37:03.000Z</updated>
+        <content type="html"><![CDATA[<p>1.上传一句话木马，将文件格式将改为图片格式<br>
+<img src="http://localhost:4000/post-images/1579685923608.png" alt="" loading="lazy"><br>
+2.使用burpsuit抓包并修改文件后缀<br>
+<img src="http://localhost:4000/post-images/1579685935909.png" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1579685941267.png" alt="" loading="lazy"><br>
+3.上传成功<br>
+<img src="http://localhost:4000/post-images/1579685958760.png" alt="" loading="lazy"><br>
+4.使用菜刀连接<br>
+<img src="http://localhost:4000/post-images/1579685967089.png" alt="" loading="lazy"><br>
+5.连接成功后进入上层目录<br>
+<img src="http://localhost:4000/post-images/1579685977793.png" alt="" loading="lazy"><br>
+6.打开flag.php即可得到flag<br>
+<img src="http://localhost:4000/post-images/1579685983581.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[解析漏洞]]></title>
-        <id>https://NowSec1.github.io/post/1</id>
-        <link href="https://NowSec1.github.io/post/1">
+        <id>http://localhost:4000/post/1</id>
+        <link href="http://localhost:4000/post/1">
         </link>
         <updated>2020-01-20T17:23:36.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="1什么是解析漏洞">1.什么是解析漏洞</h3>
