@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" >
 
-<title>1 | NowSec</title>
+<title>解析漏洞 | NowSec</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://NowSec1.github.io/favicon.ico?v=1579542774718">
+<link rel="shortcut icon" href="https://NowSec1.github.io/favicon.ico?v=1579683720791">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -81,30 +81,54 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>1</h1>
+            <h1>解析漏洞</h1>
             <p class="article-meta">
               2020-01-21
+              
+                <a href="https://NowSec1.github.io/tag/Q4ToLGlEb" class="badge ">
+                  解析漏洞
+                </a>
               
             </p>
             
             <div class="post-content">
-              <h1 id="1">1</h1>
+              <h3 id="1什么是解析漏洞">1.什么是解析漏洞</h3>
+<p>解析漏洞主要说的是一些特殊文件被IIS、Apache、Nginx在某种情况下被解释成脚本文件格式的漏洞。</p>
+<!-- more -->
+<h3 id="2iis-5x60解析漏洞">2.IIS 5.X/6.0解析漏洞</h3>
+<h4 id="1目录解析">①.目录解析</h4>
+<p>/xx.asp/xx.jpg</p>
+<p>在网站下建立文件夹的名为为.asp、.asa的文件夹，其目录内的任何扩展名的文件都被IIS当作asp文件来解析并执行<br>
+例如创建目录N0Sec.asp，那么/N0Sec.asp/1.jpg将会被当作asp文件来执行。<br>
+如果黑客可以控制上传文件夹路径，就可以不管上传后的图片改不改名都能拿到Shell了。</p>
+<h4 id="2文件解析">②.文件解析</h4>
+<p>xxx.asp;.jpg<br>
+在IIS6.0下，分号后面的不被解析，也就是说xxx.asp;.jpg会被服务器解析为xxx.asp<br>
+IIS 6.0默认可执行文件除了ASP还包括.asa、.cer、.cdx</p>
+<h3 id="3apache解析漏洞">3.Apache解析漏洞</h3>
+<pre><code>Apache是从右至左开始判断解析，如果为不可识别解析，就再往左进行判断。
+</code></pre>
+<p>例如：xxx.php.oef.rar中.oef和.rar这两种后缀不是Apache可以识别的解析，Apache就会将xxx.php.oef.rar解析为xxx.php<br>
+如何判断是不是合法后缀就是这个漏洞利用的关键，测试时可以尝试上传一个xxx.php.oef.rar去测试是否为合法后缀(可以尝试将你知道的后缀都写上)，任意不识别的后缀，会逐级向上识别</p>
+<h3 id="4iis-70iis-75nginx-803急性解析漏洞">4.IIS 7.0/IIS 7.5/Nginx &lt; 8.03急性解析漏洞</h3>
+<pre><code>在默认Fast-CGI开启状况下，黑客上传一个名字为xxx.jpg的文件，内容为
+</code></pre>
+<pre><code>&lt;?PHP fputs(fopen(‘shell.php’,’w’),&lt;?php eval($_POST[cmd])?&gt;’); ?&gt;
+</code></pre>
+<p>的文件，然后访问xxx.jpg/.php，在这个目录下就会生成一个一句话木马shell.php，www.xxx.com/logo.gif/*.php出发漏洞，如果存在漏洞，就会将前面的文件当作php执行。</p>
+<h3 id="5htaccess文件解析">5.htaccess文件解析</h3>
+<pre><code>如果在Apache中.htaccess可被执行，且可被上传。那么可以尝试在.htaccess中写入
+</code></pre>
+<pre><code>&lt;FileMatch “shell.jpg”&gt;
+SetHandler application/x-httpd-php
+&lt;/FileMatch&gt;
+</code></pre>
+<p>然后再上传shell.jpg木马，这样shell.jpg就可以解析为php文件了</p>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://NowSec1.github.io/post/hello-gridea">
-                <h3 class="post-title">
-                  Hello Gridea
-                </h3>
-              </a>
-            </div>
           
         </div>
         
@@ -112,16 +136,24 @@
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://NowSec1.github.io/images/avatar.png?v=1579542774718" class="no-responsive avatar">
+    <img src="https://NowSec1.github.io/images/avatar.png?v=1579683720791" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
         
-      
+          <a href="https://github.com/NowSec1" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
         
       
         
       
+        
+      
+        
+          <a href="https://zhuanlan.zhihu.com/c_1200006774549655552" target="_blank">
+            <i class="fab fa-zhihu"></i>
+          </a>
         
       
         
@@ -137,7 +169,7 @@
         
           
             <li>
-              <a href="https://NowSec1.github.io/post/1">1</a>
+              <a href="https://NowSec1.github.io/post/1">解析漏洞</a>
             </li>
           
         
@@ -162,14 +194,14 @@
     </div>
     <div class="row">
       
-        <a href="https://NowSec1.github.io/tag/sLeXQ-e1r" class="badge secondary">
-          Gridea
+        <a href="https://NowSec1.github.io/tag/Q4ToLGlEb" class="badge ">
+          解析漏洞
         </a>
       
     </div>
   </div>
   <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://NowSec1.github.io/atom.xml" target="_blank">RSS</a>
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">NowSec</a> | <a class="rss" href="https://NowSec1.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
 

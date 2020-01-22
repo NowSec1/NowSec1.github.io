@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://NowSec1.github.io</id>
     <title>NowSec</title>
-    <updated>2020-01-20T17:57:04.427Z</updated>
+    <updated>2020-01-22T09:02:03.975Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://NowSec1.github.io"/>
     <link rel="self" href="https://NowSec1.github.io/atom.xml"/>
@@ -11,44 +11,46 @@
     <icon>https://NowSec1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, NowSec</rights>
     <entry>
-        <title type="html"><![CDATA[1]]></title>
+        <title type="html"><![CDATA[解析漏洞]]></title>
         <id>https://NowSec1.github.io/post/1</id>
         <link href="https://NowSec1.github.io/post/1">
         </link>
         <updated>2020-01-20T17:23:36.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1">1</h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://NowSec1.github.io/post/hello-gridea</id>
-        <link href="https://NowSec1.github.io/post/hello-gridea">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        <summary type="html"><![CDATA[<h3 id="1什么是解析漏洞">1.什么是解析漏洞</h3>
+<p>解析漏洞主要说的是一些特殊文件被IIS、Apache、Nginx在某种情况下被解释成脚本文件格式的漏洞。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        <content type="html"><![CDATA[<h3 id="1什么是解析漏洞">1.什么是解析漏洞</h3>
+<p>解析漏洞主要说的是一些特殊文件被IIS、Apache、Nginx在某种情况下被解释成脚本文件格式的漏洞。</p>
 <!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+<h3 id="2iis-5x60解析漏洞">2.IIS 5.X/6.0解析漏洞</h3>
+<h4 id="1目录解析">①.目录解析</h4>
+<p>/xx.asp/xx.jpg</p>
+<p>在网站下建立文件夹的名为为.asp、.asa的文件夹，其目录内的任何扩展名的文件都被IIS当作asp文件来解析并执行<br>
+例如创建目录N0Sec.asp，那么/N0Sec.asp/1.jpg将会被当作asp文件来执行。<br>
+如果黑客可以控制上传文件夹路径，就可以不管上传后的图片改不改名都能拿到Shell了。</p>
+<h4 id="2文件解析">②.文件解析</h4>
+<p>xxx.asp;.jpg<br>
+在IIS6.0下，分号后面的不被解析，也就是说xxx.asp;.jpg会被服务器解析为xxx.asp<br>
+IIS 6.0默认可执行文件除了ASP还包括.asa、.cer、.cdx</p>
+<h3 id="3apache解析漏洞">3.Apache解析漏洞</h3>
+<pre><code>Apache是从右至左开始判断解析，如果为不可识别解析，就再往左进行判断。
+</code></pre>
+<p>例如：xxx.php.oef.rar中.oef和.rar这两种后缀不是Apache可以识别的解析，Apache就会将xxx.php.oef.rar解析为xxx.php<br>
+如何判断是不是合法后缀就是这个漏洞利用的关键，测试时可以尝试上传一个xxx.php.oef.rar去测试是否为合法后缀(可以尝试将你知道的后缀都写上)，任意不识别的后缀，会逐级向上识别</p>
+<h3 id="4iis-70iis-75nginx-803急性解析漏洞">4.IIS 7.0/IIS 7.5/Nginx &lt; 8.03急性解析漏洞</h3>
+<pre><code>在默认Fast-CGI开启状况下，黑客上传一个名字为xxx.jpg的文件，内容为
+</code></pre>
+<pre><code>&lt;?PHP fputs(fopen(‘shell.php’,’w’),&lt;?php eval($_POST[cmd])?&gt;’); ?&gt;
+</code></pre>
+<p>的文件，然后访问xxx.jpg/.php，在这个目录下就会生成一个一句话木马shell.php，www.xxx.com/logo.gif/*.php出发漏洞，如果存在漏洞，就会将前面的文件当作php执行。</p>
+<h3 id="5htaccess文件解析">5.htaccess文件解析</h3>
+<pre><code>如果在Apache中.htaccess可被执行，且可被上传。那么可以尝试在.htaccess中写入
+</code></pre>
+<pre><code>&lt;FileMatch “shell.jpg”&gt;
+SetHandler application/x-httpd-php
+&lt;/FileMatch&gt;
+</code></pre>
+<p>然后再上传shell.jpg木马，这样shell.jpg就可以解析为php文件了</p>
 ]]></content>
     </entry>
 </feed>
